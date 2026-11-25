@@ -1,33 +1,24 @@
 /* Studio 99 — prévia conceitual. Sem dependências.
    Presets de movimento (shared/motion-library): fan (cartela), curtain (máscara das fotos),
-   line-mask (títulos), accordion (serviços), press e magnetic (CTA), image-zoom (galeria). */
+   line-mask (títulos), accordion (serviços), press e magnetic (CTA), image-zoom (hero e galeria). */
 (() => {
   'use strict';
   const WHATS = '5548996227668';
   const reduz = matchMedia('(prefers-reduced-motion: reduce)');
-  const movel = matchMedia('(max-width: 760px)');
   const fino = matchMedia('(hover: hover) and (pointer: fine)');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const ease = k => 1 - Math.pow(1 - k, 3);
   const waLink = texto => `https://wa.me/${WHATS}?text=${encodeURIComponent(texto)}`;
 
-  /* ---------- Cartela de tons (assinatura) ---------- */
+  /* ---------- Cartela de tons: o leque abre quando a seção entra na tela ---------- */
   const hero = document.querySelector('[data-hero]');
-  const cartela = hero.querySelector('[data-cartela]');
+  const cartela = document.querySelector('[data-cartela]');
   const lista = cartela.querySelector('[data-tiras]');
   const tiras = [...cartela.querySelectorAll('.tira')];
-  const legenda = cartela.querySelector('[data-legenda]');
   const nomeTom = cartela.querySelector('[data-nome-tom]');
   const linkTom = cartela.querySelector('[data-link-tom]');
   const N = tiras.length;
-  const FASE = .36;            // fatia da rolagem em que o leque se abre (desktop)
-  const BASE = FASE * .85;     // a partir daqui os tons recebem destaque, um a um
   let ativa = -1;
-
-  const curso = () => hero.offsetHeight - innerHeight;
-  const rolagemLigada = () => !reduz.matches && curso() > 40;
-  const lerP = () => clamp(-hero.getBoundingClientRect().top / curso());
-  const fase = f => { if (legenda.dataset.fase !== f) legenda.dataset.fase = f; };
 
   function setAtiva(i) {
     if (i === ativa) return;
@@ -37,89 +28,65 @@
       t.classList.toggle('is-ativa', on);
       t.querySelector('.tira__btn').setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    if (i >= 0) {
-      const nome = tiras[i].dataset.nome;
-      nomeTom.textContent = nome;
-      linkTom.href = waLink(`Oi! Vim pela página e quero agendar mechas. Gostei do tom “${nome}” da cartela.`);
-    }
+    const nome = tiras[i].dataset.nome;
+    nomeTom.textContent = nome;
+    linkTom.href = waLink(`Oi! Vim pela página e quero agendar mechas. Gostei do tom “${nome}” da cartela.`);
   }
 
-  // Desktop: abre o leque e revela cada foto em máscara; depois destaca um tom por vez.
-  // Celular: uma banda aberta por vez, conforme a rolagem.
-  function pinta(p) {
-    hero.style.setProperty('--p', p.toFixed(4));
-    if (!movel.matches) {
-      const a = clamp(p / FASE);
-      // Começa com o leque entreaberto (as seis pontas já aparecem) e termina aberto.
-      cartela.style.setProperty('--abre', (.5 + .5 * ease(a)).toFixed(4));
-      tiras.forEach((t, i) => t.style.setProperty('--r', (.88 + .12 * ease(clamp(a * 1.5 - i * .1))).toFixed(3)));
-      if (p < BASE) { fase('dica'); setAtiva(-1); }
-      else { fase('tom'); setAtiva(Math.min(N - 1, Math.floor((p - BASE) / (1 - BASE) * N))); }
-    } else {
-      if (p < .02) { fase('dica'); setAtiva(0); }
-      else { fase('tom'); setAtiva(Math.min(N - 1, Math.floor(p * N))); }
-    }
+  // a: 0 (leque entreaberto) a 1 (aberto). Cada foto é revelada em máscara, de cima para baixo.
+  function pinta(a) {
+    cartela.style.setProperty('--abre', (.5 + .5 * ease(a)).toFixed(4));
+    cartela.style.setProperty('--p', a.toFixed(4));
+    tiras.forEach((t, i) => t.style.setProperty('--r', (.88 + .12 * ease(clamp(a * 1.5 - i * .1))).toFixed(3)));
   }
+  const lerA = () => clamp((innerHeight * .94 - cartela.getBoundingClientRect().top) / (innerHeight * .58));
 
   let alvo = 0, atual = 0, rodando = false;
-  // Mola leve: a cartela segue a rolagem com um pouco de inércia, sem atrasar o conteúdo.
+  // Mola leve: o leque segue a rolagem com um pouco de inércia.
   function passo() {
-    atual += (alvo - atual) * .15;
+    atual += (alvo - atual) * .14;
     if (Math.abs(alvo - atual) < .0006) atual = alvo;
     pinta(atual);
     if (atual !== alvo) requestAnimationFrame(passo); else rodando = false;
   }
 
   function iniciaCartela() {
-    if (rolagemLigada()) {
-      atual = alvo = lerP();
+    if (!reduz.matches) {
+      atual = alvo = lerA();
       pinta(atual);
     } else {
-      // Sem rolagem guiada (movimento reduzido ou sem curso): cartela aberta e estática.
+      // Movimento reduzido: leque aberto e estático.
       cartela.style.removeProperty('--abre');
-      hero.style.removeProperty('--p');
+      cartela.style.removeProperty('--p');
       tiras.forEach(t => t.style.removeProperty('--r'));
-      fase('tom');
-      ativa = -2;
-      setAtiva(0);
     }
-  }
-
-  function escolhe(i) {
-    if (rolagemLigada()) {
-      const topo0 = hero.getBoundingClientRect().top + scrollY;
-      const p = movel.matches ? (i + .5) / N : BASE + ((i + .5) / N) * (1 - BASE);
-      scrollTo({ top: topo0 + p * curso(), behavior: 'smooth' });
-    } else {
-      setAtiva(i);
-    }
+    if (ativa < 0) setAtiva(2);
   }
 
   let bloqueiaClique = false;
   tiras.forEach((t, i) => {
     const b = t.querySelector('.tira__btn');
-    b.addEventListener('click', () => { if (!bloqueiaClique) escolhe(i); });
+    b.addEventListener('click', () => { if (!bloqueiaClique) setAtiva(i); });
     b.addEventListener('keydown', e => {
-      const vertical = movel.matches;
-      const d = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: vertical ? 1 : 0, ArrowUp: vertical ? -1 : 0 }[e.key];
+      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
       if (!d) return;
       e.preventDefault();
       const j = clamp(i + d, 0, N - 1);
       tiras[j].querySelector('.tira__btn').focus({ preventScroll: true });
-      escolhe(j);
+      setAtiva(j);
     });
   });
 
-  // Arraste horizontal no celular (limiar de 40 px); a rolagem vertical segue nativa (touch-action: pan-y).
+  // Arraste horizontal (limiar de 40 px); a rolagem vertical segue nativa (touch-action: pan-y).
   let x0 = null, y0 = 0;
-  lista.addEventListener('pointerdown', e => { if (movel.matches) { x0 = e.clientX; y0 = e.clientY; } });
+  lista.addEventListener('pointerdown', e => { x0 = e.clientX; y0 = e.clientY; });
   lista.addEventListener('pointerup', e => {
     if (x0 === null) return;
     const dx = e.clientX - x0, dy = e.clientY - y0;
     x0 = null;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
       bloqueiaClique = true; setTimeout(() => { bloqueiaClique = false; }, 0);
-      escolhe(clamp(Math.max(ativa, 0) + (dx < 0 ? 1 : -1), 0, N - 1));
+      setAtiva(clamp(Math.max(ativa, 0) + (dx < 0 ? 1 : -1), 0, N - 1));
     }
   });
   lista.addEventListener('pointercancel', () => { x0 = null; });
@@ -130,7 +97,7 @@
   const contatoVisivel = new Set();
   function atualizaBarra() {
     if (!barra) return;
-    const passouHero = hero.getBoundingClientRect().bottom < innerHeight * .7;
+    const passouHero = hero.getBoundingClientRect().bottom < innerHeight * .6;
     barra.classList.toggle('is-visivel', passouHero && contatoVisivel.size === 0);
   }
 
@@ -145,8 +112,8 @@
   }
 
   function aoRolar() {
-    if (rolagemLigada()) {
-      alvo = lerP();
+    if (!reduz.matches) {
+      alvo = lerA();
       if (!rodando) { rodando = true; requestAnimationFrame(passo); }
     }
     atualizaBarra();
@@ -157,7 +124,6 @@
   let tResize;
   addEventListener('resize', () => { clearTimeout(tResize); tResize = setTimeout(() => { iniciaCartela(); aoRolar(); }, 120); });
   reduz.addEventListener?.('change', () => { iniciaCartela(); aoRolar(); });
-  movel.addEventListener?.('change', () => { ativa = -2; iniciaCartela(); aoRolar(); });
 
   /* ---------- Revelações (line-mask, fade, image-zoom) ---------- */
   if ('IntersectionObserver' in window) {

@@ -16,15 +16,15 @@ Site estático, sem dependências nem etapa de build. Sirva esta pasta com qualq
 
 ## Experiência
 
-A cartela do hero é um leque de seis amostras de cabelo. No computador, a rolagem abre o leque, revela cada foto em máscara e destaca um tom por vez; no celular, vira uma foto grande com seis amostras horizontais embaixo, e a foto troca por rolagem, por toque ou por arraste (limiar de 40 px, a rolagem vertical segue nativa; foi desenhada para alturas de 640 px ou mais, com a barra do navegador visível). O tom escolhido entra na mensagem do botão "Quero um tom assim". Com `prefers-reduced-motion` ou sem JavaScript, a cartela aparece aberta e estática (no celular, foto e amostras sem rolagem guiada) e todos os botões continuam funcionando.
+O hero é uma foto grande do estúdio (a mesma do site do salão no Canva): em tela cheia no celular e ocupando mais da metade da tela no computador. Logo abaixo, a cartela de tons: um leque de seis amostras de cabelo que se abre com a rolagem, no computador e no celular. Tocar numa amostra a destaca e entra na mensagem do botão "Quero um tom assim"; no celular também dá para arrastar para o lado (limiar de 40 px, a rolagem vertical segue nativa). Com `prefers-reduced-motion` ou sem JavaScript, o leque aparece aberto e estático e todos os botões continuam funcionando.
 
 Nenhum formulário: todos os botões abrem o WhatsApp da bio, (48) 99622-7668, com mensagem pronta citando o serviço. Nada é enviado, reservado ou armazenado pela página.
 
-Presets de `shared/motion-library` usados: `fan` (cartela), `curtain` (máscara das fotos), `line-mask` (títulos), `accordion` (serviços), `press` e `magnetic` (CTA, ponteiro fino), `image-zoom` (galeria).
+Presets de `shared/motion-library` usados: `fan` (cartela), `curtain` (máscara das fotos), `line-mask` (títulos), `accordion` (serviços), `press` e `magnetic` (CTA, ponteiro fino), `image-zoom` (hero e galeria).
 
 ## Fontes e limites
 
-Fotos: publicações DZ0NXp1ItkD, DZ0MvheIAE0, DZ0N58HIsgL, DZ0MShgoPLK e DZ8hUETlLFT do perfil, em derivados recortados. Textos: bio e legendas do perfil, citados com atribuição. Nada foi gerado por IA. Sem preços, promoções, depoimentos, anos de casa, horários, número do imóvel ou nomes de profissionais, que não foram confirmados.
+Fotos: a do hero vem do site do salão no Canva (espacomkt.my.canva.site, consultado em 25/11/2026); as demais, das publicações DZ0NXp1ItkD, DZ0MvheIAE0, DZ0N58HIsgL, DZ0MShgoPLK e DZ8hUETlLFT do perfil, em derivados recortados. Textos: bio e legendas do perfil, citados com atribuição. Nada foi gerado por IA. Sem preços, promoções, depoimentos, anos de casa, horários, número do imóvel ou nomes de profissionais, que não foram confirmados.
 
 Limites da prévia: o salão não fotografou nem enviou material para esta página; unhas, makes, sobrancelhas e estética aparecem só em texto porque o perfil público não oferece foto própria utilizável desses serviços. O endereço é o da página do Canva do salão, sem número.
 

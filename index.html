@@ -36,36 +36,48 @@
 
 <main id="conteudo">
 
-<!-- 1. HERO: a cartela de tons abre com a rolagem -->
+<!-- 1. HERO: foto do estúdio em tela cheia -->
 <section class="hero" id="inicio" data-hero aria-labelledby="hero-titulo">
-  <div class="hero__palco">
-    <div class="hero__texto">
-      <p class="eyebrow">Salão de beleza · Centro de Criciúma/SC</p>
-      <h1 id="hero-titulo" class="hero__titulo">
-        <span class="linha"><span>Studio</span></span>
-        <span class="linha"><span><em>99</em></span></span>
-      </h1>
-      <p class="hero__frase">Beleza sem complicação, resultados incríveis!</p>
-      <p class="hero__servicos">Mechas · Cortes · Unhas · Makes · Estética &amp; Protocolos</p>
-      <div class="hero__acoes">
-        <a class="botao botao--forte" data-magnetico href="https://wa.me/5548996227668?text=Oi%21%20Vim%20pela%20p%C3%A1gina%20do%20Studio%2099%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4.5h16v11H9l-5 4.5v-15.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          Agendar pelo WhatsApp
-        </a>
-        <a class="link-seta" href="#servicos">Ver serviços</a>
-      </div>
+  <div class="hero__foto">
+    <picture>
+      <source type="image/webp" srcset="assets/img/hero-estudio-720.webp 720w, assets/img/hero-estudio-1066.webp 1066w" sizes="(max-width: 760px) 100vw, 60vw">
+      <img src="assets/img/hero-estudio-1066.jpg" srcset="assets/img/hero-estudio-720.jpg 720w, assets/img/hero-estudio-1066.jpg 1066w" sizes="(max-width: 760px) 100vw, 60vw" alt="Mãos de um profissional do salão cortando uma mecha de cabelo com tesoura e pente" width="1066" height="1599" fetchpriority="high">
+    </picture>
+  </div>
+  <div class="hero__texto">
+    <p class="eyebrow">Salão de beleza · Centro de Criciúma/SC</p>
+    <h1 id="hero-titulo" class="hero__titulo">
+      <span class="linha"><span>Studio</span></span>
+      <span class="linha"><span><em>99</em></span></span>
+    </h1>
+    <p class="hero__frase">Beleza sem complicação, resultados incríveis!</p>
+    <p class="hero__servicos">Mechas · Cortes · Unhas · Makes · Estética &amp; Protocolos</p>
+    <div class="hero__acoes">
+      <a class="botao botao--forte" data-magnetico href="https://wa.me/5548996227668?text=Oi%21%20Vim%20pela%20p%C3%A1gina%20do%20Studio%2099%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4.5h16v11H9l-5 4.5v-15.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Agendar pelo WhatsApp
+      </a>
+      <a class="link-seta" href="#servicos">Ver serviços</a>
     </div>
+  </div>
+</section>
 
+<!-- 2. CARTELA DE TONS -->
+<section class="secao secao--escura secao--cartela" id="cartela" aria-labelledby="cartela-titulo">
+  <div class="conteudo">
+    <div class="cabeca">
+      <p class="rotulo revela">A cartela</p>
+      <h2 id="cartela-titulo" class="mascara"><span class="l"><span>Escolha um tom</span></span> <span class="l"><span><em>para começar a conversa.</em></span></span></h2>
+      <p class="cabeca__texto revela">Seis tons de trabalhos publicados pelo salão. Toque numa amostra e chame no WhatsApp com o tom já na mensagem.</p>
+    </div>
     <div class="cartela" data-cartela role="group" aria-label="Cartela de tons, com seis fotos de cabelo de trabalhos do Studio 99">
       <ol class="tiras" data-tiras>
         <li class="tira" style="--i:0;--tom:var(--tom-prata)" data-nome="Prata">
           <button class="tira__btn" type="button" aria-pressed="false">
             <span class="tira__cab"><span class="tira__n">01</span><b>Prata</b></span>
             <span class="tira__janela"><picture class="tira__foto">
-              <source media="(max-width: 760px)" type="image/webp" srcset="assets/img/banda-prata-533.webp 533w" sizes="100vw">
-              <source media="(max-width: 760px)" srcset="assets/img/banda-prata-533.jpg 533w" sizes="100vw">
-              <source type="image/webp" srcset="assets/img/tira-prata-300.webp 300w, assets/img/tira-prata-450.webp 450w" sizes="176px">
-              <img src="assets/img/tira-prata-450.jpg" srcset="assets/img/tira-prata-300.jpg 300w, assets/img/tira-prata-450.jpg 450w" sizes="176px" alt="Fios lisos com luzes prateadas sobre base escura" width="450" height="1216" fetchpriority="high">
+              <source type="image/webp" srcset="assets/img/tira-prata-300.webp 300w, assets/img/tira-prata-450.webp 450w" sizes="(max-width: 760px) 70px, 150px">
+              <img src="assets/img/tira-prata-450.jpg" srcset="assets/img/tira-prata-300.jpg 300w, assets/img/tira-prata-450.jpg 450w" sizes="(max-width: 760px) 70px, 150px" alt="Fios lisos com luzes prateadas sobre base escura" width="450" height="1216" loading="lazy">
             </picture></span>
           </button>
         </li>
@@ -73,10 +85,8 @@
           <button class="tira__btn" type="button" aria-pressed="false">
             <span class="tira__cab"><span class="tira__n">02</span><b>Loiro claro</b></span>
             <span class="tira__janela"><picture class="tira__foto">
-              <source media="(max-width: 760px)" type="image/webp" srcset="assets/img/banda-loiro-claro-720.webp 720w, assets/img/banda-loiro-claro-1080.webp 1080w" sizes="100vw">
-              <source media="(max-width: 760px)" srcset="assets/img/banda-loiro-claro-720.jpg 720w, assets/img/banda-loiro-claro-1080.jpg 1080w" sizes="100vw">
-              <source type="image/webp" srcset="assets/img/tira-loiro-claro-300.webp 300w, assets/img/tira-loiro-claro-450.webp 450w" sizes="176px">
-              <img src="assets/img/tira-loiro-claro-450.jpg" srcset="assets/img/tira-loiro-claro-300.jpg 300w, assets/img/tira-loiro-claro-450.jpg 450w" sizes="176px" alt="Cabelo loiro claro com luzes, preso em trança lateral" width="450" height="1236" loading="lazy">
+              <source type="image/webp" srcset="assets/img/tira-loiro-claro-300.webp 300w, assets/img/tira-loiro-claro-450.webp 450w" sizes="(max-width: 760px) 70px, 150px">
+              <img src="assets/img/tira-loiro-claro-450.jpg" srcset="assets/img/tira-loiro-claro-300.jpg 300w, assets/img/tira-loiro-claro-450.jpg 450w" sizes="(max-width: 760px) 70px, 150px" alt="Cabelo loiro claro com luzes, preso em trança lateral" width="450" height="1236" loading="lazy">
             </picture></span>
           </button>
         </li>
@@ -84,10 +94,8 @@
           <button class="tira__btn" type="button" aria-pressed="false">
             <span class="tira__cab"><span class="tira__n">03</span><b>Loiro iluminado</b></span>
             <span class="tira__janela"><picture class="tira__foto">
-              <source media="(max-width: 760px)" type="image/webp" srcset="assets/img/banda-loiro-iluminado-720.webp 720w, assets/img/banda-loiro-iluminado-1080.webp 1080w" sizes="100vw">
-              <source media="(max-width: 760px)" srcset="assets/img/banda-loiro-iluminado-720.jpg 720w, assets/img/banda-loiro-iluminado-1080.jpg 1080w" sizes="100vw">
-              <source type="image/webp" srcset="assets/img/tira-loiro-iluminado-300.webp 300w, assets/img/tira-loiro-iluminado-450.webp 450w" sizes="176px">
-              <img src="assets/img/tira-loiro-iluminado-450.jpg" srcset="assets/img/tira-loiro-iluminado-300.jpg 300w, assets/img/tira-loiro-iluminado-450.jpg 450w" sizes="176px" alt="Cabelo ondulado com mechas loiras iluminadas sobre base escura" width="450" height="1264" loading="lazy">
+              <source type="image/webp" srcset="assets/img/tira-loiro-iluminado-300.webp 300w, assets/img/tira-loiro-iluminado-450.webp 450w" sizes="(max-width: 760px) 70px, 150px">
+              <img src="assets/img/tira-loiro-iluminado-450.jpg" srcset="assets/img/tira-loiro-iluminado-300.jpg 300w, assets/img/tira-loiro-iluminado-450.jpg 450w" sizes="(max-width: 760px) 70px, 150px" alt="Cabelo ondulado com mechas loiras iluminadas sobre base escura" width="450" height="1264" loading="lazy">
             </picture></span>
           </button>
         </li>
@@ -95,10 +103,8 @@
           <button class="tira__btn" type="button" aria-pressed="false">
             <span class="tira__cab"><span class="tira__n">04</span><b>Mel</b></span>
             <span class="tira__janela"><picture class="tira__foto">
-              <source media="(max-width: 760px)" type="image/webp" srcset="assets/img/banda-mel-720.webp 720w, assets/img/banda-mel-1080.webp 1080w" sizes="100vw">
-              <source media="(max-width: 760px)" srcset="assets/img/banda-mel-720.jpg 720w, assets/img/banda-mel-1080.jpg 1080w" sizes="100vw">
-              <source type="image/webp" srcset="assets/img/tira-mel-300.webp 300w, assets/img/tira-mel-450.webp 450w" sizes="176px">
-              <img src="assets/img/tira-mel-450.jpg" srcset="assets/img/tira-mel-300.jpg 300w, assets/img/tira-mel-450.jpg 450w" sizes="176px" alt="Cabelo ondulado em tons de mel e caramelo" width="450" height="1261" loading="lazy">
+              <source type="image/webp" srcset="assets/img/tira-mel-300.webp 300w, assets/img/tira-mel-450.webp 450w" sizes="(max-width: 760px) 70px, 150px">
+              <img src="assets/img/tira-mel-450.jpg" srcset="assets/img/tira-mel-300.jpg 300w, assets/img/tira-mel-450.jpg 450w" sizes="(max-width: 760px) 70px, 150px" alt="Cabelo ondulado em tons de mel e caramelo" width="450" height="1261" loading="lazy">
             </picture></span>
           </button>
         </li>
@@ -106,10 +112,8 @@
           <button class="tira__btn" type="button" aria-pressed="false">
             <span class="tira__cab"><span class="tira__n">05</span><b>Ruivo</b></span>
             <span class="tira__janela"><picture class="tira__foto">
-              <source media="(max-width: 760px)" type="image/webp" srcset="assets/img/banda-ruivo-403.webp 403w" sizes="100vw">
-              <source media="(max-width: 760px)" srcset="assets/img/banda-ruivo-403.jpg 403w" sizes="100vw">
-              <source type="image/webp" srcset="assets/img/tira-ruivo-300.webp 300w, assets/img/tira-ruivo-317.webp 317w" sizes="176px">
-              <img src="assets/img/tira-ruivo-317.jpg" srcset="assets/img/tira-ruivo-300.jpg 300w, assets/img/tira-ruivo-317.jpg 317w" sizes="176px" alt="Cabelo liso em tom ruivo acobreado e brilhante" width="317" height="883" loading="lazy">
+              <source type="image/webp" srcset="assets/img/tira-ruivo-300.webp 300w, assets/img/tira-ruivo-317.webp 317w" sizes="(max-width: 760px) 70px, 150px">
+              <img src="assets/img/tira-ruivo-317.jpg" srcset="assets/img/tira-ruivo-300.jpg 300w, assets/img/tira-ruivo-317.jpg 317w" sizes="(max-width: 760px) 70px, 150px" alt="Cabelo liso em tom ruivo acobreado e brilhante" width="317" height="883" loading="lazy">
             </picture></span>
           </button>
         </li>
@@ -117,17 +121,14 @@
           <button class="tira__btn" type="button" aria-pressed="false">
             <span class="tira__cab"><span class="tira__n">06</span><b>Castanho escuro</b></span>
             <span class="tira__janela"><picture class="tira__foto">
-              <source media="(max-width: 760px)" type="image/webp" srcset="assets/img/banda-castanho-267.webp 267w" sizes="100vw">
-              <source media="(max-width: 760px)" srcset="assets/img/banda-castanho-267.jpg 267w" sizes="100vw">
-              <source type="image/webp" srcset="assets/img/tira-castanho-267.webp 267w" sizes="176px">
-              <img src="assets/img/tira-castanho-267.jpg" srcset="assets/img/tira-castanho-267.jpg 267w" sizes="176px" alt="Cabelo liso em tom castanho escuro" width="267" height="653" loading="lazy">
+              <source type="image/webp" srcset="assets/img/tira-castanho-267.webp 267w" sizes="(max-width: 760px) 70px, 150px">
+              <img src="assets/img/tira-castanho-267.jpg" srcset="assets/img/tira-castanho-267.jpg 267w" sizes="(max-width: 760px) 70px, 150px" alt="Cabelo liso em tom castanho escuro" width="267" height="653" loading="lazy">
             </picture></span>
           </button>
         </li>
       </ol>
       <span class="parafuso" aria-hidden="true"></span>
-      <div class="cartela__legenda" data-legenda data-fase="tom">
-        <p class="legenda__dica" data-dica>Role para abrir a cartela</p>
+      <div class="cartela__legenda" data-legenda>
         <p class="legenda__tom">
           <span class="legenda__nome" data-nome-tom>Prata</span>
           <a class="link-seta" data-link-tom href="https://wa.me/5548996227668?text=Oi%21%20Vim%20pela%20p%C3%A1gina%20e%20quero%20agendar%20mechas." target="_blank" rel="noopener">Quero um tom assim</a>
@@ -137,7 +138,7 @@
   </div>
 </section>
 
-<!-- 2. SERVIÇOS -->
+<!-- 3. SERVIÇOS -->
 <section class="secao secao--clara" id="servicos" aria-labelledby="servicos-titulo">
   <div class="conteudo">
     <div class="cabeca">
@@ -244,7 +245,7 @@
   </div>
 </section>
 
-<!-- 3. TRABALHOS -->
+<!-- 4. TRABALHOS -->
 <section class="secao secao--escura" id="trabalhos" aria-labelledby="trabalhos-titulo">
   <div class="conteudo">
     <div class="cabeca">
@@ -289,18 +290,12 @@
         <figcaption>Mel e caramelo</figcaption>
       </figure>
 
-      <figure class="g g--par g--par2 revela">
-        <div class="par">
-          <div class="g__moldura"><picture>
-            <source type="image/webp" srcset="assets/img/trab-antes-ruivo-475.webp 475w" sizes="(max-width: 760px) 46vw, 240px">
-            <img src="assets/img/trab-antes-ruivo-475.jpg" alt="Antes: cabelo preto, liso" width="475" height="1651" loading="lazy">
-          </picture><span class="g__tag">Antes</span></div>
-          <div class="g__moldura"><picture>
-            <source type="image/webp" srcset="assets/img/trab-depois-ruivo-475.webp 475w" sizes="(max-width: 760px) 46vw, 240px">
-            <img src="assets/img/trab-depois-ruivo-475.jpg" alt="Depois: cabelo ruivo acobreado, liso" width="475" height="960" loading="lazy">
-          </picture><span class="g__tag">Depois</span></div>
-        </div>
-        <figcaption>De cabelo preto para ruivo</figcaption>
+      <figure class="g g--ruivo revela">
+        <div class="g__moldura"><picture>
+          <source type="image/webp" srcset="assets/img/trab-depois-ruivo-475.webp 475w" sizes="(max-width: 760px) 46vw, 300px">
+          <img src="assets/img/trab-depois-ruivo-475.jpg" alt="Cabelo ruivo acobreado, liso e brilhante" width="475" height="960" loading="lazy">
+        </picture></div>
+        <figcaption>Ruivo acobreado</figcaption>
       </figure>
 
       <blockquote class="citacao citacao--b revela">
@@ -321,7 +316,7 @@
   </div>
 </section>
 
-<!-- 4. COMO AGENDAR -->
+<!-- 5. COMO AGENDAR -->
 <section class="secao secao--clara" id="agendar" aria-labelledby="agendar-titulo">
   <div class="conteudo">
     <div class="cabeca">
@@ -349,7 +344,7 @@
   </div>
 </section>
 
-<!-- 5. CONTATO -->
+<!-- 6. CONTATO -->
 <section class="secao secao--escura secao--contato" id="contato" aria-labelledby="contato-titulo">
   <div class="conteudo contato">
     <div class="contato__texto">
